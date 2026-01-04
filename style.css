@@ -1,0 +1,73 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa")
+        center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+}
+
+.app{
+    background:#111;
+    padding:30px;
+    width:320px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+.app h1{
+    margin-bottom:20px;
+    color:#33a0ff;
+}
+
+.search{
+    display:flex;
+    gap:10px;
+}
+
+.search input{
+    flex:1;
+    padding:10px;
+    border:none;
+    outline:none;
+    border-radius:6px;
+}
+
+.search button{
+    padding:10px 15px;
+    border:none;
+    background:#33a0ff;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.search button:hover{
+    background:#1e88e5;
+}
+
+.weather{
+    margin-top:25px;
+}
+
+.weather h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.weather p{
+    font-size:18px;
+    margin:5px 0;
+}

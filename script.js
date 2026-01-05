@@ -9,7 +9,8 @@ async function getWeather() {
   const city = encodeURIComponent(input);
   const apiKey = "9825315236794f56952150745252512";
 
-  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+  // ✅ HTTPS is MUST for GitHub Pages
+  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
 
   try {
     const response = await fetch(url);
@@ -20,6 +21,7 @@ async function getWeather() {
 
     const data = await response.json();
 
+    // ✅ API error handling
     if (data.error) {
       alert(data.error.message);
       return;
@@ -35,7 +37,7 @@ async function getWeather() {
       `☁ Condition: ${data.current.condition.text}`;
 
   } catch (error) {
-    console.error(error);
-    alert("Unable to fetch weather. Please try again.");
+    console.error("Fetch error:", error);
+    alert("Unable to fetch weather. Check internet or API key.");
   }
 }

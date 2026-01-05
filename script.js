@@ -15,7 +15,7 @@ async function getWeather() {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("HTTP error: " + response.status);
+      throw new Error("HTTP Error: " + response.status);
     }
 
     const data = await response.json();
@@ -35,7 +35,7 @@ async function getWeather() {
       `☁ Condition: ${data.current.condition.text}`;
 
   } catch (error) {
-    alert("Unable to fetch weather. Please try again later.");
-    console.error("Fetch Error:", error);
+    console.error(error);
+    alert("Unable to fetch weather. Please try again.");
   }
 }

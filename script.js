@@ -1,28 +1,41 @@
-function getWeather() {
-    const city = document.getElementById("locationInput").value;
+async function getWeather() {
+  const locationInput = document.getElementById("locationInput").value.trim();
 
-    if(city === ""){
-        alert("Please enter a location");
-        return;
+  if (locationInput === "") {
+    alert("Please enter a city name");
+    return;
+  }
+
+  const city = encodeURIComponent(locationInput);
+  const apiKey = "YOUR_API_KEY_HERE";
+
+  const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Network response failed");
     }
 
-    const apiKey = "9825315236794f56952150745252512";
-    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
+    const data = await response.json();
 
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("city").innerText =
-            `${data.location.name}, ${data.location.country}`;
+    if (data.error) {
+      alert(data.error.message);
+      return;
+    }
 
-        document.getElementById("temp").innerText =
-            `🌡 Temperature: ${data.current.temp_c} °C`;
+    document.getElementById("city").innerText =
+      `${data.location.name}, ${data.location.country}`;
 
-        document.getElementById("condition").innerText =
-            `☁ Condition: ${data.current.condition.text}`;
-    })
-    .catch(error => {
-        alert("Location not found");
-        console.error(error);
-    });
+    document.getElementById("temp").innerText =
+      `🌡 Temperature: ${data.current.temp_c} °C`;
+
+    document.getElementById("condition").innerText =
+      `☁ Condition: ${data.current.condition.text}`;
+
+  } catch (error) {
+    alert("Unable to fetch weather. Check internet or API key.");
+    console.error(error);
+  }
 }

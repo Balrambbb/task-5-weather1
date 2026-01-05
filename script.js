@@ -1,13 +1,13 @@
 async function getWeather() {
-  const locationInput = document.getElementById("locationInput").value.trim();
+  const input = document.getElementById("locationInput").value.trim();
 
-  if (locationInput === "") {
+  if (input === "") {
     alert("Please enter a city name");
     return;
   }
 
-  const city = encodeURIComponent(locationInput);
-  const apiKey = "YOUR_API_KEY_HERE";
+  const city = encodeURIComponent(input);
+  const apiKey = "9825315236794f56952150745252512";
 
   const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
 
@@ -15,7 +15,7 @@ async function getWeather() {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error("Network response failed");
+      throw new Error("HTTP error: " + response.status);
     }
 
     const data = await response.json();
@@ -35,7 +35,7 @@ async function getWeather() {
       `☁ Condition: ${data.current.condition.text}`;
 
   } catch (error) {
-    alert("Unable to fetch weather. Check internet or API key.");
-    console.error(error);
+    alert("Unable to fetch weather. Please try again later.");
+    console.error("Fetch Error:", error);
   }
 }
